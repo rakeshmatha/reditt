@@ -9,6 +9,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +21,7 @@ public class MailService {
 //    private final MailContentBuilder mailContentBuilder;
 
     //using lamda expressions we will send an email to user
+    @Async
     public void sendEmail(NotificationEmail notificationEmail){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
@@ -33,7 +35,7 @@ public class MailService {
             log.info("Activation email sent");
         }
         catch (MailException e){
-        throw new SpringRedittException("Exception occured while sending an activation link");
+        throw new SpringRedittException("Exception occured while sending an activation link", e);
         }
 
     }

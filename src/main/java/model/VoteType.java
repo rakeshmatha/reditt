@@ -17,7 +17,7 @@ public enum VoteType {
         return Arrays.stream(VoteType.values())
                 .filter(value -> value.getDirection().equals(direction))
                 .findAny()
-                .orElseThrow(() -> new SpringRedittException("Vote not found"));
+                .orElseThrow(() -> new SpringRedittException("Vote not found", e));
     }
 
     public Integer getDirection() {

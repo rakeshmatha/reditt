@@ -1,5 +1,7 @@
 package controller;
 
+import DTO.AuthenticationTokenResponse;
+import DTO.LoginRequest;
 import DTO.RegisterRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,5 +26,10 @@ public class AuthController {
     public ResponseEntity<String> verficationToken(@PathVariable String token){
         authService.verifiationToken(token);
         return new ResponseEntity<>("Activation Successful",HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public AuthenticationTokenResponse login(@RequestBody LoginRequest loginRequest){
+       return authService.login(loginRequest);
     }
 }
