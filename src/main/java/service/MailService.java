@@ -22,7 +22,7 @@ public class MailService {
 
     //using lamda expressions we will send an email to user
     @Async
-    public void sendEmail(NotificationEmail notificationEmail){
+    public void sendEmail(NotificationEmail notificationEmail) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("matharakesh46@gmail.com");
@@ -33,9 +33,8 @@ public class MailService {
         try {
             mailSender.send(messagePreparator);
             log.info("Activation email sent");
-        }
-        catch (MailException e){
-        throw new SpringRedittException("Exception occured while sending an activation link", e);
+        } catch (MailException e) {
+            throw new SpringRedittException("Exception occured while sending an activation link");
         }
 
     }

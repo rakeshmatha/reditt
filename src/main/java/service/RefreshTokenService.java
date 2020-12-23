@@ -1,11 +1,12 @@
 package service;
 
-import model.RefreshToken;
+import exception.SpringRedittException;
 import lombok.AllArgsConstructor;
+import model.RefreshToken;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import repository.RefreshTokenRepository;
-import exception.SpringRedittException;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -26,8 +27,9 @@ public class RefreshTokenService {
     }
 
     void validateRefreshToken(String token) {
+        MailException e = null;
         refreshTokenRepository.findByToken(token)
-                .orElseThrow(() -> new SpringRedittException("Invalid refresh Token", e));
+                .orElseThrow(() -> new SpringRedittException("Invalid refresh Token"));
     }
 
     public void deleteRefreshToken(String token) {

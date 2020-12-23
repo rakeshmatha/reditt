@@ -24,13 +24,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String userName){
-       Optional<User> optionalUser = userRepository.findByUsername(userName);
-       User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("No User found with username : "+userName ));
-       return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),user.isEnabled(),true,true,true,getAuthorities("USER"));
+    public UserDetails loadUserByUsername(String userName) {
+        Optional<User> optionalUser = userRepository.findByUsername(userName);
+        User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("No User found with username : " + userName));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, getAuthorities("USER"));
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities(String role){
+    public Collection<? extends GrantedAuthority> getAuthorities(String role) {
         return singletonList(new SimpleGrantedAuthority(role));
     }
 }

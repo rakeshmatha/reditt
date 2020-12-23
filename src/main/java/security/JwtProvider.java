@@ -31,7 +31,7 @@ public class JwtProvider {
             InputStream resourceStream = getClass().getResourceAsStream("/springblog.jks");
             keyStore.load(resourceStream, "secrets".toCharArray());
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
-            throw new SpringRedittException("Exception occured while loading private key", (KeyStoreException) e);
+            throw new SpringRedittException("Exception occured while loading private key");
         }
     }
 
@@ -44,12 +44,10 @@ public class JwtProvider {
         try {
             return (PrivateKey) keyStore.getKey("springblog", "secret".toCharArray());
         } catch (UnrecoverableKeyException | NoSuchAlgorithmException | KeyStoreException exception) {
-            KeyStoreException e = null;
-            throw new SpringRedittException("Exception occured while retrieving private key", e);
+            throw new SpringRedittException("Exception occured while retrieving private key");
 
         }
     }
-
 
 
     public String generateTokenWithUserName(String username) {
@@ -72,7 +70,7 @@ public class JwtProvider {
             return keyStore.getCertificate("springblog").getPublicKey();
         } catch (KeyStoreException e) {
             throw new SpringRedittException("Exception occured while " +
-                    "retrieving public key from keystore", e);
+                    "retrieving public key from keystore");
         }
     }
 

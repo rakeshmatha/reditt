@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
-    protected String username;
-    protected String password;
-    protected String email;
-
+public class LogoutRequest {
+    @NotBlank
+    private String refreshToken;
 }
